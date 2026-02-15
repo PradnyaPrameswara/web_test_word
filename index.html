@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordMaster Pro - Media Belajar Informatika</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="menu-screen" class="screen">
+        <div class="hero-card">
+            <div class="glass-content">
+                <i class="fas fa-file-word logo-large"></i>
+                <h1>WordMaster <span>Pro</span></h1>
+                <p>Simulasi Kompetensi Pengolahan Dokumen Fundamental</p>
+                
+                <div class="menu-nav">
+                    <button onclick="startGame()" class="btn-main">Mulai Petualangan</button>
+                    <div class="sub-nav">
+                        <button onclick="toggleModal('modal-flow')">Alur Sistem</button>
+                        <button onclick="toggleModal('modal-kisi')">Kisi-kisi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <header class="office-ribbon">
+            <div class="toolbar-main">
+                <div class="tool-group">
+                    <button class="tool-btn" onclick="format('bold')" title="Tebal"><i class="fas fa-bold"></i></button>
+                    <button class="tool-btn" onclick="format('italic')" title="Miring"><i class="fas fa-italic"></i></button>
+                    <button class="tool-btn" onclick="format('underline')" title="Garis Bawah"><i class="fas fa-underline"></i></button>
+                </div>
+                <div class="tool-group">
+                    <button class="tool-btn" onclick="format('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                    <button class="tool-btn" onclick="format('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                    <button class="tool-btn" onclick="format('justifyRight')"><i class="fas fa-align-right"></i></button>
+                </div>
+                <button class="btn-exit" onclick="backToMenu()">Keluar</button>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <aside class="control-panel">
+                <div class="lvl-badge">LEVEL <span id="lvl-num">1</span></div>
+                <h3 id="lvl-title">Memuat...</h3>
+                <div id="lvl-instr" class="instr-box"></div>
+                
+                <div id="quiz-area" class="hidden">
+                    <div id="quiz-options"></div>
+                    <div id="quiz-confirm" class="confirm-box hidden"></div>
+                </div>
+
+                <div class="footer-action">
+                    <button id="check-btn" class="btn-practice-pro" onclick="validateAction()">
+                        <span>Selesaikan Misi</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div id="feedback-msg"></div>
+                </div>
+            </aside>
+
+            <section class="paper-view">
+                <div id="document-paper" contenteditable="true"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="recap-screen" class="screen hidden">
+        <div class="recap-card" id="recap-content">
+            <div class="recap-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Laporan Kompetensi</h1>
+                <p>WordMaster Pro: Hasil Belajar Fundamental</p>
+            </div>
+
+            <div class="recap-body">
+                <table class="recap-table">
+                    <thead>
+                        <tr>
+                            <th>Tahap</th>
+                            <th>Topik</th>
+                            <th>Status</th>
+                            <th>Kunci Jawaban</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recap-list"></tbody>
+                </table>
+            </div>
+
+            <div class="recap-footer">
+                <div class="score-badge">
+                    <span>SKOR AKHIR</span>
+                    <h2 id="final-score">0</h2>
+                </div>
+                <div class="recap-btns" data-html2canvas-ignore="true">
+                    <button onclick="exportToPDF()" class="btn-export"><i class="fas fa-file-pdf"></i> Simpan PDF</button>
+                    <button onclick="backToMenu()" class="btn-secondary-small">Menu Utama</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-flow" class="modal hidden">
+        <div class="modal-body">
+            <h3><i class="fas fa-project-diagram"></i> Alur Pembelajaran</h3>
+            <ul class="flow-list">
+                <li><span>1</span> <b>Identifikasi:</b> Mengenali ikon dan fungsi melalui kuis kognitif.</li>
+                <li><span>2</span> <b>Analisis:</b> Memilih format yang tepat untuk kebutuhan dokumen.</li>
+                <li><span>3</span> <b>Aplikasi:</b> Mempraktikkan langsung pada lembar kerja digital.</li>
+            </ul>
+            <button onclick="toggleModal('modal-flow')" class="btn-close">Tutup</button>
+        </div>
+    </div>
+
+    <div id="modal-kisi" class="modal hidden">
+        <div class="modal-body">
+            <h3><i class="fas fa-lightbulb"></i> Fundamental Ms. Word</h3>
+            <div class="kisi-grid">
+                <div class="kisi-card"><b>Font Group:</b> Mengatur dekorasi karakter (Tebal, Miring, Garis Bawah).</div>
+                <div class="kisi-card"><b>Paragraph Group:</b> Mengatur posisi dan tata letak teks pada halaman.</div>
+                <div class="kisi-card"><b>Etika:</b> Hindari penggunaan garis bawah berlebih pada paragraf panjang.</div>
+            </div>
+            <button onclick="toggleModal('modal-kisi')" class="btn-close">Siap!</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
