@@ -168,3 +168,51 @@ h1 span { color: var(--accent); font-weight: 300; }
 @media print {
     .btn-exit, .toolbar-main, .footer-action { display: none; }
 }
+
+@media (max-width: 1024px) {
+    body { overflow: auto; }
+
+    .content-wrapper { flex-direction: column; height: auto; }
+
+    .control-panel {
+        width: 100%; border-right: none; border-bottom: 1px solid #ddd;
+        padding: 24px;
+    }
+
+    .paper-view { padding: 24px; }
+
+    #document-paper {
+        width: 100%; min-height: 60vh; padding: 36px; font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-card { width: 90vw; padding: 32px; }
+    .logo-large { font-size: 56px; }
+
+    .office-ribbon { padding: 12px 16px; }
+    .toolbar-main { gap: 10px; flex-wrap: wrap; }
+    .tool-btn { padding: 8px 10px; }
+    .btn-exit { padding: 8px 12px; }
+
+    .control-panel { padding: 20px; }
+    .btn-practice-pro { padding: 18px; font-size: 16px; }
+
+    #document-paper { padding: 28px; }
+}
+
+@media (max-width: 480px) {
+    .hero-card { padding: 24px; border-radius: 20px; }
+    .btn-main { padding: 14px; font-size: 16px; }
+    .sub-nav { flex-direction: column; }
+
+    .tool-group { width: 100%; justify-content: space-between; }
+    .toolbar-main { align-items: stretch; }
+
+    .instr-box { font-size: 15px; }
+    .opt-btn { padding: 12px; font-size: 14px; }
+
+    #document-paper {
+        padding: 22px; font-size: 15px; min-height: 55vh;
+    }
+}
